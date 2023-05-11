@@ -14,9 +14,11 @@ import { takeLatest, put } from "redux-saga/effects";
 
 //make reducers:
 const gifs = (state = [], action) => { 
-    // if (action.type === 'GET_GIFS') {
-    //     return Number(action.payload);
-    // }
+    if (action.type === 'SET_GIFS') {
+        const copyOfState = [...state]
+        copyOfState.push(action.payload);
+        return copyOfState;
+    }
     return state;
 };
 
@@ -35,7 +37,7 @@ sagaMiddleware.run(rootSaga);
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeLatest('NAME !', fetchGifs)
+    yield takeLatest('SAGA/FETCH_GIFS', fetchGifs)
 }
 
 // SAGA functions:
@@ -43,7 +45,7 @@ function* fetchGifs() {
     try {
         const response = yield axios({
             method: 'GET',
-            url: '/fruit'
+            url: '/api/gify'
         })
         console.log('>>>>>>>', response.data);
 

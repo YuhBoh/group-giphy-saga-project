@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function App(props) {
 
+  const dispatch = useDispatch();
   const [userInput, setUserInput] = useState('');
-  const [searchResults, setSearchResults] = useState(['1', '2', '3']);
+  const searchResults = useSelector(store => store.gifs);
 
   useEffect(() => {
 
@@ -13,6 +15,9 @@ function App(props) {
 
   const handleClick = () => {
     console.log('User INPUT:', userInput);
+    dispatch({
+      type: 'SAGA/FETCH_GIFS'
+    })
     // axios.get(‘/gifs’)
     //   .then((response) => {  // response = {url: ‘the url of the gif’, title: ‘the title’}
     //     console.log(‘send success:’, response);
@@ -35,7 +40,7 @@ function App(props) {
       <button onClick={handleClick}>Search </button>
       <div>
       {searchResults.map((gif) => (
-            <h2>INSERT GIF HERE</h2>
+            <img src={gif.url}/>
           ))}
       </div>
     </div>
