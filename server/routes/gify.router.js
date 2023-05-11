@@ -3,7 +3,11 @@ const router = new express.Router();
 const axios = require('axios');
 require('dotenv').config();
 
-const GifyUrl = `http://api.giphy.com/v1/gifs/trending?api_key=Y0ZaaAP2UryTmYayhv2yOJChsoDiiPqH&limit=3&rating=pg13`;
+const GifyUrl = `http://api.giphy.com/v1/gifs/search?api_key=Y0ZaaAP2UryTmYayhv2yOJChsoDiiPqH&limit=3&rating=pg13&q=cat`;
+
+
+//search url 
+//api.giphy.com/v1/gifs/search
 
 router.get('/', (req, res) => {
 
