@@ -22,6 +22,10 @@ const gifs = (state = [], action) => {
     return state;
 };
 
+function* fetchFavorites(){
+    console.log('in fetch favorites');
+}
+
 function* newSearch(action){
 console.log('this is aciton',action.payload);
     try {
@@ -44,6 +48,26 @@ console.log('this is aciton',action.payload);
     
 }
 
+function* newFavorite(action){
+    console.log('this is the new favorite',action.payload);
+        try {
+            const response = yield axios({
+                method: 'POST',
+                url: '/api/favorite',
+                data: action.payload
+            })
+            // console.log(' in post route>>>>>>>', response.data);
+    
+            //const theBasket = response.data;
+            yield put({
+                type: 'SAGA/FETCH_FAVORITES',
+            })
+        } catch (error) {
+            console.log('Something broke SAGA/POST for favorites', error)
+        }
+        
+    }
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -61,6 +85,8 @@ sagaMiddleware.run(rootSaga);
 function* rootSaga() {
     yield takeLatest('SAGA/FETCH_GIFS', fetchGifs)
     yield takeLatest('SAGA/NEW_SEARCH', newSearch )
+    yield takeLatest('SAGA/FETCH_FAVORITES', fetchFavorites)
+    yield takeLatest('SAGA/SET_FAVORITES', newFavorite)
 }
 
 // SAGA functions:

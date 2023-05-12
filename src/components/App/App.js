@@ -2,9 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import SearchView from '../SearchView/SearchView';
 
 function App(props) {
-
+  
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState('');
   const searchResults = useSelector(store => store.gifs);
@@ -38,23 +39,10 @@ console.log(userInput);
   };
 
   return (
+ 
     <div>
-      <h1>Giphy Search!</h1>
-      <input
-        placeholder='search' typeof='text'
-        value={userInput}
-        onChange={event => setUserInput(event.target.value)}
-      />
-      <button onClick={handleClick}>Search </button>
-      <div>
-      {searchResults.map((gif) => (
-        <div>
-            <img src={gif.images.downsized_medium.url}/>
-            <button onClick={setFavorite}>⭐️</button>
-            </div>
-          ))}
+      <SearchView/>
       </div>
-    </div>
   );
 }
 
