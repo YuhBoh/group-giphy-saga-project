@@ -8,15 +8,23 @@ function App(props) {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState('');
   const searchResults = useSelector(store => store.gifs);
-
+console.log('this is search results',searchResults);
   useEffect(() => {
 
   }, [])
-
+  const setFavorite = () => {
+    console.log('nice');
+  }
+console.log(userInput);
   const handleClick = () => {
     console.log('User INPUT:', userInput);
+    // dispatch({
+    //   type: 'SAGA/FETCH_GIFS'
+    // })
+
     dispatch({
-      type: 'SAGA/FETCH_GIFS'
+      type: 'SAGA/NEW_SEARCH',
+      payload: userInput
     })
     // axios.get(‘/gifs’)
     //   .then((response) => {  // response = {url: ‘the url of the gif’, title: ‘the title’}
@@ -40,7 +48,10 @@ function App(props) {
       <button onClick={handleClick}>Search </button>
       <div>
       {searchResults.map((gif) => (
-            <img src={gif.url}/>
+        <div>
+            <img src={gif.images.downsized_medium.url}/>
+            <button onClick={setFavorite}>⭐️</button>
+            </div>
           ))}
       </div>
     </div>
