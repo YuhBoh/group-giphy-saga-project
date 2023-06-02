@@ -28,23 +28,23 @@ function* fetchFavorites(){
 
 function* newSearch(action){
 console.log('this is aciton',action.payload);
-    try {
-        const response = yield axios({
-            method: 'POST',
-            url: '/api/gify',
-            data:{
-                newSearch:action.payload}
-            
-        })
-        // console.log(' in post route>>>>>>>', response.data);
+  try {
+      const response = yield axios({
+          method: 'POST',
+          url: '/api/gify',
+          data:{
+              newSearch:action.payload}
+          
+      })
+      // console.log(' in post route>>>>>>>', response.data);
 
-        //const theBasket = response.data;
-        yield put({
-            type: 'SAGA/FETCH_GIFS',
-        })
-    } catch (error) {
-        console.log('Something broke SAGA/POST', error)
-    }
+      //const theBasket = response.data;
+      yield put({
+          type: 'SAGA/FETCH_GIFS',
+      })
+  } catch (error) {
+      console.log('Something broke SAGA/POST', error)
+  }
     
 }
 
@@ -83,10 +83,10 @@ sagaMiddleware.run(rootSaga);
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeLatest('SAGA/FETCH_GIFS', fetchGifs)
-    yield takeLatest('SAGA/NEW_SEARCH', newSearch )
-    yield takeLatest('SAGA/FETCH_FAVORITES', fetchFavorites)
-    yield takeLatest('SAGA/SET_FAVORITES', newFavorite)
+  yield takeLatest('SAGA/FETCH_GIFS', fetchGifs)
+  yield takeLatest('SAGA/NEW_SEARCH', newSearch )
+  yield takeLatest('SAGA/FETCH_FAVORITES', fetchFavorites)
+  yield takeLatest('SAGA/SET_FAVORITES', newFavorite)
 }
 
 // SAGA functions:
