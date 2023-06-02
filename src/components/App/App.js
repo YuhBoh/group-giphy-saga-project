@@ -9,7 +9,7 @@ function App(props) {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState('');
   const searchResults = useSelector(store => store.gifs);
-console.log('this is search results',searchResults);
+  console.log('this is search results',searchResults);
   useEffect(() => {
 
   }, [])
@@ -42,7 +42,7 @@ console.log(userInput);
  
     <div>
       <SearchView/>
-      </div>
+    </div>
   );
 }
 
